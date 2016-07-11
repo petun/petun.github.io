@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Полезные шпаргалки для .htaccess"
-date:   2016-07-11 12:51:02 +0300
+title:  ".htaccess useful configs"
+date:   2016-07-11 13:14:02 +0300
 categories: htaccess apache
 ---------------------------
 
