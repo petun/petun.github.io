@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  ".htaccess useful configs"
+title:  "htaccess useful configs"
 date:   2016-07-11 13:14:02 +0300
 categories: htaccess apache
 ---------------------------
