@@ -1,0 +1,143 @@
+---
+layout: post
+title:  "Zend Framework 1 Marks"
+date:   2016-07-11 13:14:02 +0300
+categories: zend 
+---
+
+# Install
+using Zend_Tool
+
+```bash
+zf create project quickstart 
+cd library; ln -s path/to/ZendFramework/library/Zend .
+```
+
+APPLICATION_ENV - set in public index.php file.
+
+Zend_Application - main application class.
+
+Config formats can by ini, php or xml.
+
+Core Functionality - https://framework.zend.com/manual/1.12/ru/zend.application.core-functionality.html
+
+Need to know:
+- Zend_Application_Resource_Resource
+- Zend_Application_Bootstrap_ResourceBootstrapper
+- Zend_Application_Bootstrap_BootstrapAbstract
+- Zend_Application_Bootstrap_Bootstrap
+- Zend_Application_Resource_Resource
+
+!!!Main resources here - https://framework.zend.com/manual/1.12/ru/zend.application.available-resources.html
+
+# Structure
+
+`quickstart/application/views/scripts` - View Path
+
+
+
+# Layouts (Zend_Layout)
+`../bin/zf.sh enable layout` - Create layout
+
+This command adds this line to config `resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"`
+
+```php
+<?php echo $this->doctype() ?>
+<html>
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+    <?php echo $this->headScript() ?>
+</head>
+<body>
+    <?php echo $this->layout()->content ?>
+</body>
+</html>
+```
+
+The simplest way to add a bootstrap resource is to simply create a protected method beginning with the phrase _init. 
+In this case, we want to initialize the doctype, so we'll create an `_initDoctype()` method within our bootstrap class:
+
+
+
+# Database
+- Zend_Db_Table
+- 
+
+There is 3 main classes: Mapper, Business Model and Table
+
+
+```bash
+zf configure db-adapter "adapter=PDO_MYSQL&dbname=zend&host=localhost&username=root&password=" production
+zf create db-table Guestbook guestbook 
+zf create model GuestbookMapper
+zf create model Guestbook
+```
+
+
+# Controllers
+```bash
+zf create controller Product
+zf create action sign Guestbook
+```
+
+Assign var to view is simple:
+`$this->view->entries = $objects;`
+
+
+
+#Form 
+- Zend_Form
+
+```php
+<?php
+$this->setMethod('post');
+
+// Add an email element
+$this->addElement('text', 'email', array(
+    'label'      => 'Your email address:',
+    'required'   => true,
+    'filters'    => array('StringTrim'),
+    'validators' => array(
+        'EmailAddress',
+    )
+));
+
+// Add the comment element
+$this->addElement('textarea', 'comment', array(
+    'label'      => 'Please Comment:',
+    'required'   => true,
+    'validators' => array(
+        array('validator' => 'StringLength', 'options' => array(0, 20))
+        )
+));
+
+// Add a captcha
+$this->addElement('captcha', 'captcha', array(
+    'label'      => 'Please enter the 5 letters displayed below:',
+    'required'   => true,
+    'captcha'    => array(
+        'captcha' => 'Figlet',
+        'wordLen' => 5,
+        'timeout' => 300
+    )
+));
+
+// Add the submit button
+$this->addElement('submit', 'submit', array(
+    'ignore'   => true,
+    'label'    => 'Sign Guestbook',
+));
+
+// And finally add some CSRF protection
+$this->addElement('hash', 'csrf', array(
+    'ignore' => true,
+));
+```
+
+
+# Auth and ALC
+- Zend_Auth
+- Zend_Acl
+
