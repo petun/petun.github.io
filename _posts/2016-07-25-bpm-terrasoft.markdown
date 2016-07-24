@@ -7,7 +7,7 @@ categories: terrasoft bpm-online
 
 
 # Основные ссылки и ресурсы
-Во первых, нужно обязательно зарегистрироваться на форуме http://www.community.terrasoft.ru/
+Во первых, нужно обязательно зарегистрироваться на форуме [http://www.community.terrasoft.ru/]
 Именно тут можно найти ответы на практически любые вопросы по системе.
 
 Ну и конечно нужно изучить [офф документацию] для разработчиков.
@@ -15,11 +15,11 @@ categories: terrasoft bpm-online
 
 # Окружение
 Что бы начать разрабатывать для платформы, необходимо иметь следующие компоненты в системе:
- 1.  Windows 2012 R2
- 2.  MSSQL Server 2008
- 3.  Visual Studio 2015 - тут подойдет даже Community Edition
- 4.  SQL Server Management Studio
- 5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
+  1.  Windows 2012 R2
+  2.  MSSQL Server 2008
+  3.  Visual Studio 2015 - тут подойдет даже Community Edition
+  4.  SQL Server Management Studio
+  5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
 
 
 # Отладка кода
@@ -27,7 +27,7 @@ categories: terrasoft bpm-online
 Одним из ключевых моментов, который влияет на скорость и качество разработки конечно является
  возможность серверной отладки кода.
 По большому счету не буду переписывать оригинал, даю просто ссылку, где достаточно подробно расписано как все настроить.
-https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda
+[https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda]
 
 ## Клиентский код
 К сожалению так и не удалось узнать, каким образом можно разрабатывать клиентский код, не вставляя
@@ -64,3 +64,5 @@ https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda
 
 [офф документацию]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/dokumentaciya-po-razrabotke-bpmonline
 [почитать тут]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-klientskogo-koda
+[http://www.community.terrasoft.ru/]: http://www.community.terrasoft.ru/
+[https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda
