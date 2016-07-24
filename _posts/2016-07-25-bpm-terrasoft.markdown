@@ -42,6 +42,7 @@ categories: terrasoft bpm-online
 
 
 # Примеры работы с серверным EntityQuery
+
 ## Получение данных
 
     var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
@@ -64,6 +65,140 @@ categories: terrasoft bpm-online
 
     item.GetColumnValue("RegionId").ToString();
     item.GetColumnValue("Region_Name").ToString();
+
+
+## Пример рабочего сервиса
+
+```cs
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.ServiceModel.Activation;
+using System.Configuration;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using Terrasoft.Common;
+using Terrasoft.Core;
+using Terrasoft.Core.DB;
+using Terrasoft.Core.Entities;
+using System.Web;
+using Websharks.Loader;
+
+namespace Terrasoft.Configuration.CustomConfigurationService
+{
+
+    // Класс сервиса помечен обязательными атрибутами [ServiceContract] и
+    // [AspNetCompatibilityRequirements] с параметрами.
+    [ServiceContract]
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
+    public class Loader
+    {
+
+        // Метод сервиса помечен обязательными атрибутами [OperationContract] и
+        // [WebInvoke] с параметрами.
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped,
+        ResponseFormat = WebMessageFormat.Json)]
+        public LoadResult LoadPhoto(string photoId)
+        {
+            var errorMessage = "";
+            try
+            {
+                var appSettings = ConfigurationSettings.AppSettings;
+
+                var loader = new Websharks.Loader.Loader(
+                    appSettings.Get("AWSS3BucketName"),
+                    appSettings.Get("CloudFrontDomainName")
+                    );
+
+                var result = loader.LoadPhoto(GetFileFromDb(photoId), photoId, appSettings.Get("PhotoLoaderwaterMarkPath"));
+                if (result != null)
+                {
+                    var link = result.ImageUrl;
+                    if (SetFileLink(photoId, link))
+                    {
+                        return result;
+                    }
+                }
+
+            }
+            catch (Exception s3Exception)
+            {
+                errorMessage = s3Exception.Message;
+            }
+
+            // fail result
+            return new LoadResult()
+            {
+                Error = true,
+                ErrorMessage = errorMessage
+            };
+        }
+
+        private Stream GetFileFromDb(string id)
+        {
+            var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
+
+            // Создание запроса к схеме City, добавление в запрос колонки Name.
+            var esqResult = new EntitySchemaQuery(userConnection.EntitySchemaManager, "PropertyGalleryImage");
+            esqResult.AddColumn("Data");
+
+            // Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
+            var entity = esqResult.GetEntity(userConnection, new Guid(id));
+
+            var value = entity.GetBytesValue("Data");
+
+            return new MemoryStream(value);
+        }
+
+
+        private bool SetFileLink(string id, string link)
+        {
+            var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
+
+            // Создание запроса к схеме City, добавление в запрос колонки Name.
+            var esqResult = new EntitySchemaQuery(userConnection.EntitySchemaManager, "PropertyGalleryImage");
+            esqResult.AddAllSchemaColumns();
+
+            // Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
+            var entity = esqResult.GetEntity(userConnection, new Guid(id));
+
+            entity.SetColumnValue("Link", link);
+            entity.SetBytesValue("Data", new byte[] { });
+            return entity.Save();
+        }
+
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped,
+      ResponseFormat = WebMessageFormat.Json)]
+        public string RemovePhoto(string photoId)
+        {
+            try
+            {
+                var appSettings = ConfigurationSettings.AppSettings;
+
+                var loader = new Websharks.Loader.Loader(
+                    appSettings.Get("AWSS3BucketName"),
+                    appSettings.Get("CloudFrontDomainName")
+                    );
+
+                return loader.RemovePhotos(new List<string> {
+                    photoId + ".jpg", photoId + "_thumb.jpg"
+                }.ToArray()).ToString();
+            }
+            catch (Exception s3Exception)
+            {
+                return s3Exception.Message;
+            }
+        }
+    }
+}
+```
+
+Доступ по данного сервиса после установки будет следующим: `http://exmaple.com/0/rest/ServiceName/MethodName`
 
 
 [офф документацию]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/dokumentaciya-po-razrabotke-bpmonline
