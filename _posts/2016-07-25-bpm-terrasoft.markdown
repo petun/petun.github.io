@@ -39,29 +39,27 @@ https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda
 
 # Примеры работы с серверным EntityQuery
 ## Получение данных
-```C#
-var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
 
-// Создание экземпляра запроса EntitySchemaQuery с корневой схемой "City".
-var esqQuery = new EntitySchemaQuery(userConnection.EntitySchemaManager, "Property");
+    var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
 
-// Добавление в запрос колонки с наименованием страны, которой принадлежит город.
-esqQuery.AddAllSchemaColumns();
+    // Создание экземпляра запроса EntitySchemaQuery с корневой схемой "City".
+    var esqQuery = new EntitySchemaQuery(userConnection.EntitySchemaManager, "Property");
 
-esqQuery.AddColumn("PropertyType.Name");
-esqQuery.AddColumn("City.Name");
+    // Добавление в запрос колонки с наименованием страны, которой принадлежит город.
+    esqQuery.AddAllSchemaColumns();
 
-// Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
-var collection = esqQuery.GetEntityCollection(userConnection);
-var entity = esqQuery.GetEntity(userConnection, new Guid(id));
-```
+    esqQuery.AddColumn("PropertyType.Name");
+    esqQuery.AddColumn("City.Name");
+
+    // Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
+    var collection = esqQuery.GetEntityCollection(userConnection);
+    var entity = esqQuery.GetEntity(userConnection, new Guid(id));
 
 **Важно!** - что бы получить значение колонки из связаной таблицы, нужно обратиться к ней
 вот таким образом: `ИмяСушности_ИмяКолонки`. Например:
-```C#
-item.GetColumnValue("RegionId").ToString();
-item.GetColumnValue("Region_Name").ToString();
-```
+
+    item.GetColumnValue("RegionId").ToString();
+    item.GetColumnValue("Region_Name").ToString();
 
 
 [офф документацию]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/dokumentaciya-po-razrabotke-bpmonline
