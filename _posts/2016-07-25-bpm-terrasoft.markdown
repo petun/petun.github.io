@@ -45,26 +45,31 @@ categories: terrasoft bpm-online
 
 ## Получение данных
 
-    var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
+```cs
+var userConnection = (UserConnection)HttpContext.Current.Session["UserConnection"];
 
-    // Создание экземпляра запроса EntitySchemaQuery с корневой схемой "City".
-    var esqQuery = new EntitySchemaQuery(userConnection.EntitySchemaManager, "Property");
+// Создание экземпляра запроса EntitySchemaQuery с корневой схемой "City".
+var esqQuery = new EntitySchemaQuery(userConnection.EntitySchemaManager, "Property");
 
-    // Добавление в запрос колонки с наименованием страны, которой принадлежит город.
-    esqQuery.AddAllSchemaColumns();
+// Добавление в запрос колонки с наименованием страны, которой принадлежит город.
+esqQuery.AddAllSchemaColumns();
 
-    esqQuery.AddColumn("PropertyType.Name");
-    esqQuery.AddColumn("City.Name");
+esqQuery.AddColumn("PropertyType.Name");
+esqQuery.AddColumn("City.Name");
 
-    // Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
-    var collection = esqQuery.GetEntityCollection(userConnection);
-    var entity = esqQuery.GetEntity(userConnection, new Guid(id));
+// Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
+var collection = esqQuery.GetEntityCollection(userConnection);
+var entity = esqQuery.GetEntity(userConnection, new Guid(id));
+```
 
 **Важно!** - что бы получить значение колонки из связаной таблицы, нужно обратиться к ней
 вот таким образом: `ИмяСушности_ИмяКолонки`. Например:
 
-    item.GetColumnValue("RegionId").ToString();
-    item.GetColumnValue("Region_Name").ToString();
+```cs
+item.GetColumnValue("RegionId").ToString();
+item.GetColumnValue("Region_Name").ToString();
+```
+
 
 
 ## Пример рабочего сервиса
