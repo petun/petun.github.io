@@ -22,6 +22,7 @@ Config formats can by ini, php or xml.
 Core Functionality - https://framework.zend.com/manual/1.12/ru/zend.application.core-functionality.html
 
 Need to know:
+
  -  Zend_Application_Resource_Resource
  -  Zend_Application_Bootstrap_ResourceBootstrapper
  -  Zend_Application_Bootstrap_BootstrapAbstract
