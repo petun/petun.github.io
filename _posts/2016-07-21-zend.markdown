@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Zend Framework 1 Marks"
-date:   2016-07-11 13:14:02 +0300
+date:   2016-07-21 13:14:02 +0300
 categories: zend 
 ---
 
@@ -22,11 +22,11 @@ Config formats can by ini, php or xml.
 Core Functionality - https://framework.zend.com/manual/1.12/ru/zend.application.core-functionality.html
 
 Need to know:
-- Zend_Application_Resource_Resource
-- Zend_Application_Bootstrap_ResourceBootstrapper
-- Zend_Application_Bootstrap_BootstrapAbstract
-- Zend_Application_Bootstrap_Bootstrap
-- Zend_Application_Resource_Resource
+-  Zend_Application_Resource_Resource
+-  Zend_Application_Bootstrap_ResourceBootstrapper
+-  Zend_Application_Bootstrap_BootstrapAbstract
+-  Zend_Application_Bootstrap_Bootstrap
+-  Zend_Application_Resource_Resource
 
 !!!Main resources here - https://framework.zend.com/manual/1.12/ru/zend.application.available-resources.html
 
