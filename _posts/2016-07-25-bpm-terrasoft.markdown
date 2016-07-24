@@ -15,11 +15,11 @@ categories: terrasoft bpm-online
 
 # Окружение
 Что бы начать разрабатывать для платформы, необходимо иметь следующие компоненты в системе:
-1.  Windows 2012 R2
-2.  MSSQL Server 2008
-3.  Visual Studio 2015 - тут подойдет даже Community Edition
-4.  SQL Server Management Studio
-5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
+ 1.  Windows 2012 R2
+ 2.  MSSQL Server 2008
+ 3.  Visual Studio 2015 - тут подойдет даже Community Edition
+ 4.  SQL Server Management Studio
+ 5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
 
 
 # Отладка кода
