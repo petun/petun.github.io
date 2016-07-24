@@ -41,7 +41,7 @@ categories: terrasoft bpm-online
 
 
 
-# Примеры работы с серверным EntityQuery
+# Примеры работы с серверным кодом (написание WCF сервисов)
 
 ## Получение данных
 
@@ -70,6 +70,16 @@ item.GetColumnValue("RegionId").ToString();
 item.GetColumnValue("Region_Name").ToString();
 ```
 
+## Изменение сущностей
+
+```cs
+// Выполнение запроса к базе данных и получение объекта с заданным идентификатором.
+var entity = esqResult.GetEntity(userConnection, new Guid(id));
+
+entity.SetColumnValue("Link", link);
+entity.SetBytesValue("Data", new byte[] { });
+return entity.Save();
+```
 
 
 ## Пример рабочего сервиса
@@ -204,6 +214,111 @@ namespace Terrasoft.Configuration.CustomConfigurationService
 ```
 
 Доступ по данного сервиса после установки будет следующим: `http://exmaple.com/0/rest/ServiceName/MethodName`
+
+**Важно!** Доступ до сервисов осуществляется ТОЛЬКО если пройдена процедура авторизации,
+соответсвенно для того, что бы взаимодействовать со своими сервисами извне, требуется первым делом авторизоваться в системе
+и далее уже осуществлять запросы, предоставляя авторизационные куки.
+Вот небольшой пример, написаный с использованием yii2-browser.
+
+```php
+<?php
+/**
+ * Created by PhpStorm.
+ * User: User
+ * Date: 20.07.2016
+ * Time: 15:31
+ */
+
+namespace common\components;
+
+
+use yii\base\Component;
+use yii\httpclient\Client;
+use yii\web\Cookie;
+
+class TerrasoftODataClient extends Component
+{
+
+    public $domain;
+
+    public $userName;
+
+    public $userPassword;
+
+    protected $_entityServiceUri;
+
+    protected $_authServiceUri;
+
+    /**
+     * @var Client
+     */
+    protected $_client;
+
+    protected $_autoCookies;
+
+
+    public function init() {
+        $this->_entityServiceUri = sprintf('http://%s/0/ServiceModel/EntityDataService.svc/', $this->domain);;
+        $this->_authServiceUri = sprintf('http://%s/ServiceModel/AuthService.svc/Login', $this->domain);
+        $this->_client = new Client();
+    }
+
+    public function authorize() {
+        $response = $this->_client->createRequest()
+            ->setMethod('POST')
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl($this->_authServiceUri)
+            ->setHeaders([
+                'ContentType' => 'application/json',
+                'Accept' => 'application/json'
+            ])->setData(
+                [
+                    'UserName' => $this->userName,
+                    'UserPassword' => $this->userPassword,
+                    'TimeZoneOffset' => '-180'
+                ]
+            )->send();
+
+        if ($response->statusCode == 200 && $response->cookies->get('.ASPXAUTH') instanceof Cookie) {
+            $this->_autoCookies = $response->cookies;
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getContacts()
+    {
+        $url = $this->_constructSelectUrl('ContactCollection', ['Id', 'Name']);
+        $data = $this->_makeDataResponse($url);
+
+        return $data;
+    }
+
+    private function _constructSelectUrl($collection, array $selectFields)
+    {
+        return $this->_entityServiceUri . $collection . '?select=' . implode(',', $selectFields);
+    }
+
+    private function _makeDataResponse($url) {
+        if ($this->_autoCookies) {
+            $response = $this->_client->createRequest()
+                ->setMethod('GET')
+                ->setUrl($url)
+                ->setCookies($this->_autoCookies)
+                ->setHeaders(['ContentType' => 'application/json'])
+                ->send();
+
+            if ($response->getIsOk()) {
+                return $response->data;
+            }
+        }
+
+        return false;
+    }
+}
+
+```
 
 
 [офф документацию]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/dokumentaciya-po-razrabotke-bpmonline
