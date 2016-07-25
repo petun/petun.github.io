@@ -22,6 +22,9 @@ categories: terrasoft bpm-online
   4.  SQL Server Management Studio
   5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
 
+Если всего этого у вас нет, всегда можно просто взять [бесплатное демо на 14 дней] (при регистрации
+ можно выбрать пакет **team**) и попробовать.
+Но в этом случае у вас не будет возможности полноценно отлаживать серверный код.
 
 # Отладка кода
 
@@ -325,3 +328,4 @@ class TerrasoftODataClient extends Component
 [почитать тут]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-klientskogo-koda
 [http://www.community.terrasoft.ru/]: http://www.community.terrasoft.ru/
 [https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda]: https://academy.terrasoft.ru/documents/technic-sdk/7-7-0/otladka-servernogo-koda
+[бесплатное демо на 14 дней]: https://www.terrasoft.ru/trial?product=ru-sales-omnichannel
