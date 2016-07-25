@@ -16,13 +16,10 @@ php_flag  log_errors on
 php_value error_log  error.log
 
 php_value session.use_only_cookies 1
-
 php_value session.use_trans_sid 0
 
 php_value upload_max_filesize 512M
-
 php_value post_max_size 512M
-
 
 php_value memory_limit 64M
 ```
