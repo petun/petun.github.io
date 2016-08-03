@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Требования к верстке HTML с использованием twitter bootstrap"
-date:   2016-08-93 13:14:02 +0300
+date:   2016-08-03 13:14:02 +0300
 categories: bootstrap yii2
 ---
 

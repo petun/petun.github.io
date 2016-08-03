@@ -84,6 +84,21 @@ entity.SetBytesValue("Data", new byte[] { });
 return entity.Save();
 ```
 
+## Способ конвертации сущности terrasoft в свой объект
+
+```cs
+private T convertObject<T>(Entity entity)
+{
+    var json = Entity.SerializeToJson(entity);
+
+    dynamic a = JsonConvert.DeserializeObject(json);
+    var b = JsonConvert.SerializeObject(a.Entity);
+
+    return JsonConvert.DeserializeObject<T>(b);
+}
+
+```
+
 
 ## Пример рабочего сервиса
 
