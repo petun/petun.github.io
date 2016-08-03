@@ -1,0 +1,11 @@
+# Установка
+`composer create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application=2.2.7 zf2`
+
+# Запуск на dev
+`php -S 0.0.0.0:8080 -t public/ public/index.php`
+
+# Основные компоненты системы
+##
+
+configuration-mapping-table
+https://framework.zend.com/manual/2.4/en/tutorials/config.advanced.html#configuration-mapping-table
