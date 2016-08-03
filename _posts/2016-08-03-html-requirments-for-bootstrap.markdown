@@ -110,7 +110,7 @@ Yii2 Framework предоставляет очень большие возмож
 - Form
 - Button
 - Modal (модальное окно)
-- Tab ()
+- Tab
 - Navigation Bar (основное меню или дополнительные меню)
 - Alert
 - Carousel (слайдер)
