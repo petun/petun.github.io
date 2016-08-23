@@ -14,13 +14,6 @@ categories: terrasoft bpm-online
 
 
 # Окружение
-Что бы начать разрабатывать для платформы, необходимо иметь следующие компоненты в системе:
-
-  1.  Windows 2012 R2
-  2.  MSSQL Server 2008
-  3.  Visual Studio 2015 - тут подойдет даже Community Edition
-  4.  SQL Server Management Studio
-  5.  Ну и конечно сама система BPM Online + инструкции по установке (в моем случае это был небольшой pdf файл)
 
 Если всего этого у вас нет, всегда можно просто взять [бесплатное демо на 14 дней] (при регистрации
  можно выбрать пакет **team**) и попробовать.
@@ -43,6 +36,15 @@ categories: terrasoft bpm-online
 Подробнее можно [почитать тут].
 
 
+# Backup рабочей схемы
+
+- нужно создать файл backup.bat в директории `<ДиректорияСайта>\Terrasoft.WebApp\DesktopBin\WorkspaceConsole\`
+- наполнить сайт содержимым
+```
+Terrasoft.Tools.WorkspaceConsole.exe -operation=SaveDBContent -contentTypes=Repository -userName=Supervisor -userPassword=Supervisor -workspaceName=Default -destinationPath=C:\backup
+```
+где `Supervisor` - логин и пароль администратора BPM.
+- выполнить созданый файл через командную строку
 
 # Примеры работы с серверным кодом (написание WCF сервисов)
 
