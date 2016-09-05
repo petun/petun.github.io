@@ -31,7 +31,7 @@ aws_secret_access_key = ACCESS_KEY_HERE
 
 Далее в config файле прописать:
 
-```
+```xml
 <appSettings>
  <add key="AWSProfilesLocation" value="C:\\user.aws" />
  <add key="AWSProfileName" value="user-profile" />
@@ -40,7 +40,7 @@ aws_secret_access_key = ACCESS_KEY_HERE
 ```
 
 
-```c#
+```cs
 var client = new AmazonS3Client();
 var fileTransferUtility = new TransferUtility(client);
 
