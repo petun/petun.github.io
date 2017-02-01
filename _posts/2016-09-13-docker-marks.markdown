@@ -48,6 +48,7 @@ volumes:
     - "8888:80"
    volumes:
     - ./src:/www/
+```    
 
 ## Sample modx docker-compose
 ```yaml
