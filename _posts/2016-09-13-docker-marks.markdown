@@ -34,13 +34,20 @@ or 0.0.0.0 (ie not 127.0.0.1). Then containers can connect to this address.
 ## Logs
 `syslog -k Sender Docker`
 
+## Docker-toolbox for windows
+`COMPOSE_CONVERT_WINDOWS_PATHS=1 docker-compose up -d`
+
+More shared folders must be named with this rules: `D:\` -> `d`, `D:\OpenServer` -> `d/OpenServer`, 
+
+
 ## Simple lamp installation
 ```yaml
 version: '2'
 
 volumes:
   mysql_db:
-  
+
+services:
   web:
    image: janes/alpine-lamp      
    restart: always
