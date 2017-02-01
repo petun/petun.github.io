@@ -34,6 +34,21 @@ or 0.0.0.0 (ie not 127.0.0.1). Then containers can connect to this address.
 ## Logs
 `syslog -k Sender Docker`
 
+## Simple lamp installation
+```yaml
+version: '2'
+
+volumes:
+  mysql_db:
+  
+  web:
+   image: janes/alpine-lamp      
+   restart: always
+   ports:
+    - "8888:80"
+   volumes:
+    - ./src:/www/
+
 ## Sample modx docker-compose
 ```yaml
 version: '2'
