@@ -45,3 +45,11 @@ RewriteRule ^netcat_files/.+\.jpg$ /1.jpg [R=301,L]
 RewriteCond %{HTTP_HOST} ^vyksa-rf.ru [NC]
 RewriteRule ^(.*)$ http://xn--80ady2a0c.xn--p1ai/$1 [R=301,L]
 ```
+
+
+```
+# redirect to only one domain name
+RewriteCond %{HTTP_HOST} .
+RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com [NC]
+RewriteRule (.*) http://example-domain-please-change.com/$1 [R=301,L]
+```
