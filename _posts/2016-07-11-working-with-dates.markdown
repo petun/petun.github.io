@@ -23,3 +23,10 @@ $dateInterval = new DateInterval('P2DT2H23M);
 ```
 
 [http://php.net/manual/ru/class.dateinterval.php]: http://php.net/manual/ru/class.dateinterval.php
+
+
+```php
+// month period
+$from = strtotime('first day of previous month 00:00:00');
+$to = strtotime('first day of this month 00:00:00') -1;
+```
