@@ -56,6 +56,6 @@ RewriteRule (.*) http://example-domain-please-change.com/$1 [R=301,L]
 
 
 ```
-# one page redirect
+# one page redirect and **all** subpages regirect
 Redirect 301 /about/news/ http://sitename.ru/press/news/
 ```
