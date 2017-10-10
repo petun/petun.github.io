@@ -9,6 +9,9 @@ categories: htaccess apache
 
 ```bash
 find . -type f -newermt 2017-10-01 -name "*.php"
+
+# delete all files which finds in prev command
+find . -type f -newermt 2017-10-01 -name "*.php" | xargs rm -rf
 ```
 
 Можно так же поискать через:
