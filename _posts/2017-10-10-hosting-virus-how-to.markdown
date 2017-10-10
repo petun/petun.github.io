@@ -16,6 +16,9 @@ find . -type f -newermt 2017-10-01 -name "*.php"
 find . -type f -newermt 2017-10-01 -name "*.php" | xargs rm -rf
 ```
 
+Обязательно нужно провероить корневой .htaccess, если что, тупо заменить его на файл по умолчанию:
+`cp ~/modx/modx-2.3.3-pl/ht.access .htaccess`
+
 После очистки можно запаковать все php файлы вот таким образом:
 ```
 rm -rf core/cache/*
