@@ -25,8 +25,16 @@ $dateInterval = new DateInterval('P2DT2H23M);
 [http://php.net/manual/ru/class.dateinterval.php]: http://php.net/manual/ru/class.dateinterval.php
 
 
+[http://php.net/manual/ru/datetime.formats.relative.php]: http://php.net/manual/ru/datetime.formats.relative.php
+
 ```php
 // month period
 $from = strtotime('first day of previous month 00:00:00');
 $to = strtotime('first day of this month 00:00:00') -1;
+
+// for periods - last day
+$yesterday = strtotime('yesterday', time());
+
+// for period - last week
+$lastWeek = strtotime('-7 day', time());
 ```
