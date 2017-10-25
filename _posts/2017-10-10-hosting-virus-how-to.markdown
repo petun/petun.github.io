@@ -64,6 +64,8 @@ RewriteRule ^(.*)$ - [F,L]
 ```bash
 find . -type f -exec chmod 0444 {} \;
 find . -type d -exec chmod 0555 {} \;
+# chmod for all need dirs
+chmod -R 777 core/cache/
 ```
 
 И наоборот, вернуть все на запись (например для обновления CMS):
