@@ -65,7 +65,11 @@ RewriteRule ^(.*)$ - [F,L]
 find . -type f -exec chmod 0444 {} \;
 find . -type d -exec chmod 0555 {} \;
 # chmod for all need dirs
-chmod -R 777 core/cache/
+chmod -R 777 core/cache
+chmod 666 core/config/config.inc.php
+chmod -R 777 core/export
+chmod -R 777 core/packages
+chmod -R 755 assets/
 ```
 
 И наоборот, вернуть все на запись (например для обновления CMS):
