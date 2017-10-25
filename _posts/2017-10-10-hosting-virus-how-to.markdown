@@ -58,6 +58,22 @@ RewriteCond %{THE_REQUEST} ^.*engine/\d+\.html.+$ [NC]
 RewriteRule ^(.*)$ - [F,L]
 ```
 
+## Права на папки
+
+Как вариант, можно запретить писать везде. Вот команда:
+```bash
+find . -type f -exec chmod 0444 {} \;
+find . -type d -exec chmod 0555 {} \;
+```
+
+И наоборот, вернуть все на запись (например для обновления CMS):
+```bash
+find . -type f -exec chmod 0644 {} \;
+find . -type d -exec chmod 0755 {} \;
+```
+
+
+
 
 ## Дополнительно
 
