@@ -25,7 +25,7 @@ find . -type f -newermt 2017-10-01
 После очистки можно запаковать все php файлы вот таким образом:
 ```
 rm -rf core/cache/*
-find . -name "*.php" -o -name "*.htaccess" -o name "*.js" | tar zcvf sitename.php-js-files.tgz -T -
+find . -name "*.php" -o -name "*.htaccess" -o -name "*.js" | tar zcvf sitename.php-js-files.tgz -T -
 ```
 
 Далее, если опять вирусня.. копируем архив из php в корень сайта, ну и далее:
