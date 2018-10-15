@@ -31,7 +31,7 @@ find . -name "*.php" -o -name "*.htaccess" -o -name "*.js" | tar zcvf sitename.p
 Далее, если опять вирусня.. копируем архив из php в корень сайта, ну и далее:
 
 ```
-find . -name "*.php" -o -name "*.htaccess" -o name ".js" | xargs rm -rf
+find . -name "*.php" -o -name "*.htaccess" -o -name ".js" | xargs rm -rf
 tar zxvf sitename.php-js-files.tgz 
 ```
 
