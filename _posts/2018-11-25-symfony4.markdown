@@ -1,0 +1,128 @@
+---
+layout: post
+title:  "Symfony 4 marks"
+date:   2018-11-25 23:00:00 +0300
+categories: symfony4 php framework
+---
+
+# Install
+
+```bash
+composer create-project symfony/skeleton my-project
+
+# optional
+composer require symfony/web-server-bundle --dev
+composer require sensiolabs/security-checker --dev
+
+# start dev server
+php bin/console server:start 0.0.0.0:8000
+```
+
+# Controllers
+
+Make it faster:
+
+```bash
+php bin/console make:controller
+```
+
+# Routes
+
+test routes
+
+```bash
+php bin/console debug:router
+```
+
+## By config file (config/routes.yaml)
+
+```yml
+app_lucky_number:
+    path: /lucky/number
+    controller: App\Controller\LuckyController::number
+```
+
+## By annotations in controller
+
+```bash
+composer require annotations
+```
+
+```php
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/test", name="test")
+ */
+public function index() {}
+```
+
+
+# Template
+
+https://symfony.com/doc/current/templating.html
+
+Twig syntax examples:
+
+```twig
+{{ name }} - var name - say somthing
+
+do somthing
+{% for item in navigation %}
+    <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+{% endfor %} 
+
+{# ... #} - comments
+
+
+{{ title|upper }} - filter example
+
+```
+
+
+## Using assets
+
+```bash
+composer require symfony/asset
+```
+
+
+
+## Using Webpack Encore 
+https://symfony.com/doc/current/frontend.html#webpack-encore
+
+[User bootstrap and CSS](https://symfony.com/doc/current/frontend/encore/bootstrap.html)
+
+
+```bash
+composer require encore
+npm install -g yarn
+yarn install
+
+# build
+yarn encore dev
+
+# build and watch
+yarn encore dev --watch
+
+#build prod
+yarn encore production
+
+### ENABLE SCSS
+yarn add sass-loader@^7.0.1 node-sass --dev
+
+
+## use full features
+# https://symfony.com/doc/current/frontend/encore/postcss.html
+yarn add --dev postcss-loader autoprefixer
+
+
+# adds bootstrap support
+yarn add bootstrap --dev
+yarn add jquery popper.js --dev
+
+# Using react support https://symfony.com/doc/current/frontend/encore/reactjs.html
+yarn add --dev @babel/preset-react
+yarn add react react-dom prop-types
+
+```
