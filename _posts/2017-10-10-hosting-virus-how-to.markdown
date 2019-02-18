@@ -105,3 +105,8 @@ Examples of time_period:
 - Less than 30 days ago: -ctime -30
 - Exactly 30 days ago: -ctime 30
 
+Еще вирусня прячется в картинках, да да.. и такое бывает )
+```bash
+grep -l -R  "<?php" images/*
+```
+
