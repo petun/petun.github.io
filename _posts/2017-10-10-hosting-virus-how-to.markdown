@@ -108,5 +108,6 @@ Examples of time_period:
 Еще вирусня прячется в картинках, да да.. и такое бывает )
 ```bash
 grep -l -R  "<?php" images/*
+grep -l -R  "<?php" | grep jpg | xargs rm
 ```
 
